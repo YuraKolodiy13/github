@@ -1,29 +1,43 @@
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { END } from 'redux-saga'
-import { wrapper } from '../store'
-import { loadData, startClock, tickClock } from '../actions'
-import Page from '../components/page'
+import wrapper from '../store/store'
+import {searchUsers} from "../actions/github";
+import Link from "next/link";
 
-const Index = () => {
-  const dispatch = useDispatch()
+const Home = ({user: userFromServer}) => {
+  const dispatch = useDispatch();
+
+  const user = userFromServer || useSelector(state => state.github.user);
+  const repos = useSelector(state => state.github.repos);
 
   useEffect(() => {
-    dispatch(startClock())
-  }, [dispatch])
+    console.log(user, 'user')
+    console.log(userFromServer, 'userFromServer')
+    if(userFromServer === null)  dispatch(searchUsers('YuraKolodiy13'))
+  }, []);
 
-  return <Page title="Index Page" linkTo="/other" NavigateTo="Other Page" />
-}
+  return (
+    <div>gfdagdf
+      <h1>{user.name}</h1>
+      <ul>
+        {repos && repos.map(item =>
+          <li key={item.id}>{item.name}</li>
+        )}
+      </ul>
+      <Link href='/other'><a>other</a></Link>
+    </div>
+  )
+};
 
-export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
-  store.dispatch(tickClock(false))
+Home.getInitialProps = async ({req, store}) => {
 
-  if (!store.getState().placeholderData) {
-    store.dispatch(loadData())
-    store.dispatch(END)
+  if(!req) return {user: null};
+  else {
+    store.dispatch(searchUsers('YuraKolodiy13'));
+    store.dispatch(END);
+    await store.sagaTask.toPromise();
   }
+};
 
-  await store.sagaTask.toPromise()
-})
-
-export default Index
+export default Home
