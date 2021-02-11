@@ -1,6 +1,9 @@
 import React from 'react';
 import App from 'next/app';
 import wrapper from '../store/store';
+import '../styles/globals.scss'
+import '../styles/repos.scss'
+import '../styles/events.scss'
 
 class MyApp extends App {
   static getInitialProps = async ({Component, ctx}) => {

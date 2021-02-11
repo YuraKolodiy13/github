@@ -8,8 +8,20 @@ export const searchUsersApi = (user) => {
   )
 };
 
-export const getUserRepoApi = (user) => {
+export const getUserReposApi = (user) => {
   return service.get(
-    `https://api.github.com/users/${user}/repos`,
+    `https://api.github.com/users/${user}/repos?sort=updated&direction=desc&page=1&per_page=10`,
+  )
+};
+
+export const getUserRepApi = ({id, name}) => {
+  return service.get(
+    `https://api.github.com/repos/${id}/${name}/contents`,
+  )
+};
+
+export const getEventsApi = () => {
+  return service.get(
+    `https://api.github.com/events`,
   )
 };
