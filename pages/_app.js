@@ -4,6 +4,7 @@ import wrapper from '../store/store';
 import '../styles/globals.scss'
 import '../styles/repos.scss'
 import '../styles/events.scss'
+import '../styles/users.scss'
 
 class MyApp extends App {
   static getInitialProps = async ({Component, ctx}) => {

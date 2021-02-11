@@ -7,8 +7,11 @@ export const Layout = ({children, title = 'Next app'}) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <header className='container'>
-        <Link href={'/'}><a>Home</a></Link>
+      <header>
+        <div className="container">
+          <Link href={'/'}><a>Home</a></Link>
+          <Link href={'/users'}><a>Users</a></Link>
+        </div>
       </header>
       <main className='container'>
         {children}

@@ -19,3 +19,8 @@ export const GET_EVENTS = 'GET_EVENTS';
 export const GET_EVENTS_SUCCESS = 'GET_EVENTS_SUCCESS';
 export const GET_EVENTS_FAILED = 'GET_EVENTS_FAILED';
 export const getEvents = defaultActionCreator(GET_EVENTS, 'data');
+
+export const GET_USERS = 'GET_USERS';
+export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
+export const GET_USERS_FAILED = 'GET_USERS_FAILED';
+export const getUsers = defaultActionCreator(GET_USERS, 'data');

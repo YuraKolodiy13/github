@@ -25,3 +25,9 @@ export const getEventsApi = () => {
     `https://api.github.com/events`,
   )
 };
+
+export const getUsersApi = () => {
+  return service.get(
+    `https://api.github.com/users`,
+  )
+};

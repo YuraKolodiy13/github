@@ -9,7 +9,6 @@ import {useRouter} from "next/router";
 const Repos = ({repos: reposFromServer}) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  console.log(router, 'router')
   const repos = reposFromServer || useSelector(state => state.github.repos);
 
   useEffect(() => {
