@@ -4,12 +4,14 @@ import {getUsers, searchUsers} from "../actions/github";
 import {Layout} from "../components/Layout";
 import Link from "next/link";
 import {END} from "redux-saga";
+import {Loader} from "../components/Loader";
 
 const Users = ({users: usersFromServer}) => {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
   const user = useSelector(state => state.github.user);
   const users = usersFromServer || useSelector(state => state.github.users);
+  const loading = useSelector(state => state.github.loading);
 
   useEffect(() => {
     if(usersFromServer === null)  dispatch(getUsers())
@@ -19,6 +21,8 @@ const Users = ({users: usersFromServer}) => {
     e.preventDefault();
     dispatch(searchUsers(searchValue))
   };
+
+  if(loading) return <Loader/>;
 
   return (
     <Layout title='Users'>
@@ -32,7 +36,7 @@ const Users = ({users: usersFromServer}) => {
             />
             <button type='submit'>Explore</button>
           </form>
-          <Link href={`users/${user.login}`}><a>{user.name}</a></Link>
+          {user && <Link href={`users/${user.login}`}><a>{user.name}</a></Link>}
         </div>
         <div className="users__list">
           {users && users.map(item =>

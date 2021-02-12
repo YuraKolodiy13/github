@@ -4,15 +4,19 @@ import { END } from 'redux-saga'
 import {getEvents} from "../actions/github";
 import Link from "next/link";
 import {Layout} from "../components/Layout";
+import {Loader} from "../components/Loader";
 
 const Home = ({events: eventsFromServer}) => {
   const dispatch = useDispatch();
 
   const events = eventsFromServer || useSelector(state => state.github.events);
+  const loading = useSelector(state => state.github.loading);
 
   useEffect(() => {
     if(eventsFromServer === null)  dispatch(getEvents())
   }, []);
+
+  if(loading) return <Loader/>;
 
   return (
     <Layout title='Events'>
