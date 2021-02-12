@@ -1,19 +1,19 @@
 import { useEffect } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { END } from 'redux-saga'
-import {getEvents} from "../actions/github";
+import {getGists} from "../actions/github";
 import Link from "next/link";
 import {Layout} from "../components/Layout";
 import {Loader} from "../components/Loader";
 
-const Home = ({events: eventsFromServer}) => {
+const Gists = ({gists: gistsFromServer}) => {
   const dispatch = useDispatch();
 
-  const events = eventsFromServer || useSelector(state => state.github.events);
+  const gists = gistsFromServer || useSelector(state => state.github.gists);
   const loading = useSelector(state => state.github.loading);
 
   useEffect(() => {
-    if(eventsFromServer === null)  dispatch(getEvents())
+    if(gistsFromServer === null)  dispatch(getGists())
   }, []);
 
   return (
@@ -21,18 +21,24 @@ const Home = ({events: eventsFromServer}) => {
       {loading
         ? <Loader/>
         : <div className='events'>
-          {events && events.map(item =>
+          {gists && gists.map(item =>
             <div className='events__item' key={item.id}>
               <div className="events__img--wrap">
-                <div className="events__img" style={{backgroundImage: `url(${item.actor.avatar_url})`}}/>
+                <div className="events__img" style={{backgroundImage: `url(${item.owner.avatar_url})`}}/>
               </div>
               <div className="events__info">
                 <div className="events__title">
-                  <Link href={`/users/${item.actor.login}`}><a>{item.actor.login}</a></Link>
+                  <Link href={`/users/${item.owner.login}`}><a>{item.owner.login}</a></Link>
+                </div>
+                <div className="events__files">
+                  <h4>Files:</h4>
+                  {Object.values(item.files).map(item =>
+                    <div className='events__file' key={item.filename}>
+                      <p>{item.filename} <Link href={item.raw_url}><a target="_blank">Open file</a></Link></p>
+                    </div>
+                  )}
                 </div>
                 <div className="events__add-info">
-                  <p>Repository: <Link href={`/users/${item.actor.login}/repos/${/[^/]*$/.exec(item.repo.name)[0]}`}><a>{/[^/]*$/.exec(item.repo.name)[0]}</a></Link></p>
-                  <p>Event type: {item.type}</p>
                   <p>Event time: {('0' + new Date(item.created_at + '').getHours()).slice(-2)}:
                     {('0' + new Date(item.created_at + '').getMinutes()).slice(-2)}:
                     {('0' + new Date(item.created_at + '').getSeconds()).slice(-2)}</p>
@@ -42,18 +48,19 @@ const Home = ({events: eventsFromServer}) => {
           )}
         </div>
       }
+
     </Layout>
   )
 };
 
-Home.getInitialProps = async ({req, store}) => {
+Gists.getInitialProps = async ({req, store}) => {
 
-  if(!req) return {events: null};
+  if(!req) return {gists: null};
   else {
-    store.dispatch(getEvents());
+    store.dispatch(getGists());
     store.dispatch(END);
     await store.sagaTask.toPromise();
   }
 };
 
-export default Home
+export default Gists

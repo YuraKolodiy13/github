@@ -31,3 +31,9 @@ export const getUsersApi = () => {
     `https://api.github.com/users`,
   )
 };
+
+export const getGistsApi = () => {
+  return service.get(
+    `https://api.github.com/gists`,
+  )
+};

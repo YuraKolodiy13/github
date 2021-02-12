@@ -9,13 +9,12 @@
     padding: 0 10px;
     box-sizing: border-box;
     position: relative;
+    display: flex;
+    flex-direction: column;
     &:hover{
       .events__img--wrap,
       .events__info{
         box-shadow: 3px 7px 15px 2px rgba(0,0,0,.15);
-        .events__title{
-          color: brown;
-        }
       }
     }
     .events__img--wrap{
@@ -34,14 +33,18 @@
       padding: 20px;
       transition: .3s;
       background-color: #fff;
+      flex: 1 1 auto;
       .events__title{
         font-size: 24px;
-        color: green;
-        transition: .3s;
       }
-      .events__repo{
-        display: flex;
-        flex-direction: column;
+      .events__file,
+      .events__add-info{
+        margin-top: 10px;
+        p{
+          font-size: 12px;
+          color: #000;
+          margin: 0 0 5px;
+        }
       }
     }
   }

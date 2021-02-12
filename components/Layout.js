@@ -9,8 +9,9 @@ export const Layout = ({children, title = 'Next app'}) => {
       </Head>
       <header>
         <div className="container">
-          <Link href={'/'}><a>Home</a></Link>
+          <Link href={'/'}><a>Events</a></Link>
           <Link href={'/users'}><a>Users</a></Link>
+          <Link href={'/gists'}><a>Gists</a></Link>
         </div>
       </header>
       <main className='container'>

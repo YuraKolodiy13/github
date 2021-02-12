@@ -22,41 +22,41 @@ const Users = ({users: usersFromServer}) => {
     dispatch(searchUsers(searchValue))
   };
 
-  if(loading) return <Loader/>;
-
   return (
     <Layout title='Users'>
-      <div className="users">
-        <div className="users__search">
-          <form onSubmit={onSubmit}>
-            <input
-              type="text" value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              placeholder='Github user'
-            />
-            <button type='submit'>Explore</button>
-          </form>
-          {user && <Link href={`users/${user.login}`}><a>{user.name}</a></Link>}
-        </div>
-        <div className="users__list">
-          {users && users.map(item =>
-            <div className='users__item' key={item.id}>
-              <div className="users__img--wrap">
-                <div className="users__img" style={{backgroundImage: `url(${item.avatar_url})`}}/>
-              </div>
-              <div className="users__info">
-                <div className="users__title">
-                  <Link href={`/users/${item.login}`}><a>{item.login}</a></Link>
+      {loading
+        ?  <Loader/>
+        : <div className="users">
+          <div className="users__search">
+            <form onSubmit={onSubmit}>
+              <input
+                type="text" value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                placeholder='Github user'
+              />
+              <button type='submit'>Explore</button>
+            </form>
+            {user && <Link href={`users/${user.login}`}><a>{user.name}</a></Link>}
+          </div>
+          <div className="users__list">
+            {users && users.map(item =>
+              <div className='users__item' key={item.id}>
+                <div className="users__img--wrap">
+                  <div className="users__img" style={{backgroundImage: `url(${item.avatar_url})`}}/>
                 </div>
-                <div className="users__type">
-                  <span>Type:</span>
-                  <span>{item.type}</span>
+                <div className="users__info">
+                  <div className="users__title">
+                    <Link href={`/users/${item.login}`}><a>{item.login}</a></Link>
+                  </div>
+                  <div className="events__add-info">
+                    <p>User type: {item.type}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
-      </div>
+      }
     </Layout>
   )
 };

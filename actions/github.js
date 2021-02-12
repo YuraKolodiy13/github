@@ -24,3 +24,8 @@ export const GET_USERS = 'GET_USERS';
 export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 export const GET_USERS_FAILED = 'GET_USERS_FAILED';
 export const getUsers = defaultActionCreator(GET_USERS, 'data');
+
+export const GET_GISTS = 'GET_GISTS';
+export const GET_GISTS_SUCCESS = 'GET_GISTS_SUCCESS';
+export const GET_GISTS_FAILED = 'GET_GISTS_FAILED';
+export const getGists = defaultActionCreator(GET_GISTS, 'data');

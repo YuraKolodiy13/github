@@ -47,13 +47,18 @@ header{
   z-index: 5;
   a{
     margin-right: 10px;
-    transition: .3s;
-    &:hover{
-      text-decoration: underline;
-    }
   }
 }
 
 main{
   padding-top: 100px;
+}
+
+a{
+  transition: .3s;
+  color: green;
+  &:hover{
+    color: brown;
+    text-decoration: underline;
+  }
 }
