@@ -6,7 +6,7 @@ import {
   GET_USERS_SUCCESS,
   GET_USER_REPOS,
   GET_USER_REP,
-  GET_USERS, GET_EVENTS, GET_GISTS_SUCCESS, GET_GISTS,
+  GET_USERS, GET_EVENTS, GET_GISTS_SUCCESS, GET_GISTS, GET_EMOJIS, GET_EMOJIS_SUCCESS,
 } from "../actions/github";
 import {HYDRATE} from "next-redux-wrapper";
 
@@ -17,6 +17,7 @@ const initialState = {
   events: null,
   users: null,
   gists: null,
+  emojis: null,
   loading: false,
 };
 
@@ -41,6 +42,7 @@ export default function reducer(state = initialState, action) {
     case GET_EVENTS:
     case GET_USERS:
     case GET_GISTS:
+    case GET_EMOJIS:
       return {
         ...state,
         loading: true
@@ -78,6 +80,13 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         gists: action.data,
+        loading: false
+      };
+
+    case GET_EMOJIS_SUCCESS:
+      return {
+        ...state,
+        emojis: action.data,
         loading: false
       };
 

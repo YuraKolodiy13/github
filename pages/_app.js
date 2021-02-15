@@ -5,6 +5,7 @@ import '../styles/globals.scss'
 import '../styles/repos.scss'
 import '../styles/events.scss'
 import '../styles/users.scss'
+import '../styles/emojis.scss'
 
 class MyApp extends App {
   static getInitialProps = async ({Component, ctx}) => {

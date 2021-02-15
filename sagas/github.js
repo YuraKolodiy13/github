@@ -2,7 +2,7 @@ import { all, call, put, takeEvery } from 'redux-saga/effects'
 
 import * as githubActions from '../actions/github'
 import {
-  getUserReposApi, searchUsersApi, getUserRepApi, getEventsApi, getUsersApi, getGistsApi,
+  getUserReposApi, searchUsersApi, getUserRepApi, getEventsApi, getUsersApi, getGistsApi, getEmojisApi,
 } from "../requests/github";
 
 export function* searchUsers(action) {
@@ -61,6 +61,15 @@ export function* getGists(action) {
   }
 }
 
+export function* getEmojis(action) {
+  try {
+    const response = yield call(getEmojisApi, action.data);
+    yield put({type: githubActions.GET_EMOJIS_SUCCESS, data: response.data});
+  } catch (e) {
+    yield put({ type: githubActions.GET_EMOJIS_FAILED, error: e.response });
+  }
+}
+
 
 export default all([
   takeEvery(githubActions.SEARCH_USERS, searchUsers),
@@ -69,4 +78,5 @@ export default all([
   takeEvery(githubActions.GET_EVENTS, getEvents),
   takeEvery(githubActions.GET_USERS, getUsers),
   takeEvery(githubActions.GET_GISTS, getGists),
+  takeEvery(githubActions.GET_EMOJIS, getEmojis),
 ])

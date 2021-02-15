@@ -12,6 +12,7 @@ export const Layout = ({children, title = 'Next app'}) => {
           <Link href={'/'}><a>Events</a></Link>
           <Link href={'/users'}><a>Users</a></Link>
           <Link href={'/gists'}><a>Gists</a></Link>
+          <Link href={'/emojis'}><a>Emojis</a></Link>
         </div>
       </header>
       <main className='container'>

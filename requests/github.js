@@ -37,3 +37,9 @@ export const getGistsApi = () => {
     `https://api.github.com/gists`,
   )
 };
+
+export const getEmojisApi = () => {
+  return service.get(
+    `https://api.github.com/emojis`,
+  )
+};

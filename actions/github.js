@@ -29,3 +29,8 @@ export const GET_GISTS = 'GET_GISTS';
 export const GET_GISTS_SUCCESS = 'GET_GISTS_SUCCESS';
 export const GET_GISTS_FAILED = 'GET_GISTS_FAILED';
 export const getGists = defaultActionCreator(GET_GISTS, 'data');
+
+export const GET_EMOJIS = 'GET_EMOJIS';
+export const GET_EMOJIS_SUCCESS = 'GET_EMOJIS_SUCCESS';
+export const GET_EMOJIS_FAILED = 'GET_EMOJIS_FAILED';
+export const getEmojis = defaultActionCreator(GET_EMOJIS, 'data');
